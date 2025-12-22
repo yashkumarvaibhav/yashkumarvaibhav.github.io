@@ -448,6 +448,21 @@ main {
   color: var(--muted);
 }
 
+.icon-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding-left: 0.6rem;
+  padding-right: 0.75rem;
+}
+
+.icon-pill img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
 .wa {
   display: inline-flex;
   align-items: center;
