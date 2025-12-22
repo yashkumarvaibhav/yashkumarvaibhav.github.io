@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Thapar logo">
+  <rect width="120" height="120" rx="18" fill="#ffffff" stroke="#d9e2e7"/>
+  <path d="M20 95h80" stroke="#3fada8" stroke-width="6" stroke-linecap="round"/>
+  <path d="M35 30h50v12H70v48h-8V42H35z" fill="#1f2a2f"/>
+  <path d="M60 26l18 10-18 10-18-10z" fill="#3fada8"/>
+</svg>
