@@ -341,7 +341,7 @@ function App() {
     <div className="site-shell" id="top">
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="Yash Kumar Vaibhav, home">
-          YKV<span>.</span>
+          yashkumarvaibhav
         </a>
         <nav aria-label="Primary navigation">
           <a href="#work">Work</a>
