@@ -22,8 +22,8 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; min-width: 320px; color: var(--text-body); background: var(--bg-page); line-height: 1.65; }
+html { overflow-x: clip; scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; overflow-x: clip; color: var(--text-body); background: var(--bg-page); line-height: 1.65; touch-action: pan-y pinch-zoom; }
 body, button, a { -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
@@ -168,6 +168,14 @@ footer a { justify-self: end; color: var(--text-muted); font-weight: 700; }
   .credentials-grid { grid-template-columns: 1fr; }.portrait-card { max-width: 520px; }
   .recognition-grid { grid-template-columns: 1fr; }.recognition-grid article, .recognition-grid article:first-child { padding: 30px 0; border-right: 0; border-bottom: 1px solid var(--border); }.recognition-grid article:last-child { border-bottom: 0; }
   footer { grid-template-columns: 1fr 1fr; } footer span:nth-child(2) { display: none; }
+
+  .identity-orbit,
+  .portrait-scan,
+  .achievement-planet,
+  .galaxy,
+  .ringed-planet,
+  .meteor,
+  .status-dot { animation: none; }
 }
 
 @media (max-width: 560px) {
@@ -175,7 +183,7 @@ footer a { justify-self: end; color: var(--text-muted); font-weight: 700; }
   .hero { padding: 70px 0 80px; }.hero-copy { padding: 0 0 72px; }.hero-actions { align-items: stretch; flex-direction: column; width: max-content; }
   .hero-socials { max-width: 300px; }.hero-socials a span { display: none; }.hero-socials a { width: 38px; justify-content: center; padding: 0; }
   h1 { font-size: clamp(3.25rem, 16vw, 5rem); }.hero-intro { font-size: 1.12rem; }
-  .hero-identity { width: min(84vw, 340px); }.identity-caption { grid-template-columns: 1fr; }.identity-caption > div:last-child { text-align: left; }.hero-coordinate { display: none; }
+  .hero-identity { width: min(84vw, 340px); }.identity-orbit { inset: -14px; }.identity-orbit::before { inset: 14px; }.identity-orbit::after { inset: -8px; }.identity-caption { grid-template-columns: 1fr; }.identity-caption > div:last-child { text-align: left; }.hero-coordinate { display: none; }
   .hero-identity { margin-top: 28px; }.cosmic-achievements { inset: -42px -20px -130px -20px; }.achievement-planet--problems { width: 76px; height: 76px; right: -1%; top: 5%; }.achievement-planet--rating { width: 66px; height: 66px; left: -1%; top: 34%; }.achievement-planet--dean { width: 84px; height: 84px; right: -1%; bottom: 4%; }.achievement-planet strong { font-size: .82rem; }.achievement-planet--dean strong { font-size: .72rem; }
   .achievement-planet--eroh { width: 58px; height: 58px; left: 21%; top: 2%; }.achievement-planet--codechef { width: 54px; height: 54px; right: 1%; top: 42%; }.achievement-planet--jee-advanced { width: 66px; height: 66px; left: 10%; bottom: 3%; }.achievement-planet--jee-main { width: 58px; height: 58px; left: 42%; bottom: -6%; }
   .galaxy { left: 53%; top: 6%; }.crater-moon { right: -15px; }.asteroid-belt { left: 7%; bottom: 4%; }

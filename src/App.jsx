@@ -151,15 +151,19 @@ function CosmicCanvas() {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.matchMedia('(max-width: 850px), (pointer: coarse)').matches;
     let width = 0;
     let height = 0;
     let frame = 0;
     let animationFrame;
+    let isVisible = true;
     let particles = [];
     const pointer = { x: 0, y: 0, active: false };
 
     const createParticles = () => {
-      const count = Math.min(120, Math.max(55, Math.floor((width * height) / 10500)));
+      const minimum = isMobile ? 28 : 55;
+      const maximum = isMobile ? 55 : 120;
+      const count = Math.min(maximum, Math.max(minimum, Math.floor((width * height) / 10500)));
       particles = Array.from({ length: count }, (_, index) => ({
         x: Math.random() * width,
         y: Math.random() * height,
@@ -173,9 +177,13 @@ function CosmicCanvas() {
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
-      const ratio = Math.min(window.devicePixelRatio || 1, 2);
-      width = rect.width;
-      height = rect.height;
+      const nextWidth = Math.round(rect.width);
+      const nextHeight = Math.round(rect.height);
+      if (nextWidth === width && nextHeight === height) return;
+
+      const ratio = Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 2);
+      width = nextWidth;
+      height = nextHeight;
       canvas.width = width * ratio;
       canvas.height = height * ratio;
       context.setTransform(ratio, 0, 0, ratio, 0, 0);
@@ -184,10 +192,10 @@ function CosmicCanvas() {
 
     const draw = () => {
       context.clearRect(0, 0, width, height);
-      frame += reduceMotion ? 0 : 1;
+      frame += reduceMotion || isMobile ? 0 : 1;
 
       particles.forEach((particle, index) => {
-        if (!reduceMotion) {
+        if (!reduceMotion && !isMobile) {
           particle.x += particle.vx;
           particle.y += particle.vy;
           if (particle.x < -10) particle.x = width + 10;
@@ -225,7 +233,7 @@ function CosmicCanvas() {
       });
 
       const sweep = ((frame * 2.1) % (width + 520)) - 260;
-      if (!reduceMotion) {
+      if (!reduceMotion && !isMobile) {
         context.beginPath();
         context.moveTo(sweep, height * 0.18);
         context.lineTo(sweep - 190, height * 0.38);
@@ -234,7 +242,7 @@ function CosmicCanvas() {
         context.stroke();
       }
 
-      if (!reduceMotion) animationFrame = requestAnimationFrame(draw);
+      if (!reduceMotion && !isMobile && isVisible) animationFrame = requestAnimationFrame(draw);
     };
 
     const onPointerMove = (event) => {
@@ -244,15 +252,29 @@ function CosmicCanvas() {
       pointer.active = true;
     };
     const onPointerLeave = () => { pointer.active = false; };
+    const onResize = () => {
+      resize();
+      if (reduceMotion || isMobile) draw();
+    };
+
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      cancelAnimationFrame(animationFrame);
+      if (isVisible && !reduceMotion && !isMobile) draw();
+    });
 
     resize();
     draw();
-    window.addEventListener('resize', resize);
-    canvas.addEventListener('pointermove', onPointerMove);
-    canvas.addEventListener('pointerleave', onPointerLeave);
+    visibilityObserver.observe(canvas);
+    window.addEventListener('resize', onResize);
+    if (!isMobile) {
+      canvas.addEventListener('pointermove', onPointerMove);
+      canvas.addEventListener('pointerleave', onPointerLeave);
+    }
     return () => {
       cancelAnimationFrame(animationFrame);
-      window.removeEventListener('resize', resize);
+      visibilityObserver.disconnect();
+      window.removeEventListener('resize', onResize);
       canvas.removeEventListener('pointermove', onPointerMove);
       canvas.removeEventListener('pointerleave', onPointerLeave);
     };
