@@ -1,631 +1,462 @@
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
-import iiitdLogo from '../iiitd_logo.png';
-import myPhoto from '../myPhoto.png';
-import tietLogo from '../logo_tiet.png';
-import cbseLogo from '../cbse_logo.png';
-import jnvLogo from '../jnv_logo.jpg';
-import linkedinIcon from '../linkedin.png';
-import codeforcesIcon from '../codeforces.png';
-import leetcodeIcon from '../leetcode.png';
-import code360Icon from '../code360.png';
-import githubIcon from '../GitHub-logo.jpg';
-import gmailIcon from '../gmail_logo.jpg';
-import phoneIcon from '../phone.png';
-import whatsappIcon from '../whatsapp_logo.jpg';
-import resumePdf from '../resume_YashKumarVaibhav.pdf';
+import portrait from '../myPhoto.png';
 
-const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Education', href: '#education' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Certifications', href: '#certifications' },
-  { label: 'Achievements', href: '#achievements' },
-  { label: 'Contact', href: '#contact' },
+const resumeUrl = 'https://drive.google.com/file/d/1tcMk7e5Wb2hNuMk0wINL136-hengflT1/view?usp=sharing';
+
+const links = {
+  github: 'https://github.com/yashkumarvaibhav',
+  linkedin: 'https://www.linkedin.com/in/yashkumarvaibhav/',
+  codeforces: 'https://codeforces.com/profile/yashkumarvaibhav',
+  leetcode: 'https://leetcode.com/u/yashkumarvaibhav/',
+  code360: 'https://www.naukri.com/code360/profile/yashkrvaibhav',
+};
+
+const heroLinks = [
+  ['github', 'GitHub', links.github],
+  ['linkedin', 'LinkedIn', links.linkedin],
+  ['code', 'Codeforces', links.codeforces],
+  ['brackets', 'LeetCode', links.leetcode],
+  ['mail', 'Email', 'mailto:yashkumarvaibhav.official@gmail.com'],
 ];
 
-const heroBadges = [
-  'M.Tech (CSE) IIIT Delhi ’27',
-  'Microbiome Informatics Lab',
-  'Deep Learning on Human Gut Microbiome',
-  'Codeforces Expert',
-  'CodeChef 4★',
-  'Naukri EROH AIR 36',
-  'B.E. (CSE) TIET ’23',
-  '500+ unique DSA problems solved',
-];
-
-const motionStrip = [
-  'Deep Learning on Human Gut Microbiome',
-  'Codeforces Expert · Rating 1718',
-  '500+ unique DSA problems solved',
-  'Naukri EROH AIR 36',
-  'IIIT Delhi M.Tech CSE',
-  'Software development',
-];
-
-const socialLinks = [
+const projects = [
   {
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/yashkumarvaibhav/',
-    icon: linkedinIcon,
+    index: '01',
+    title: 'GWiz',
+    subtitle: 'Agentic AI assistant for Google Workspace',
+    description:
+      'A full-stack assistant spanning Gmail, Calendar, Drive, Docs, Tasks, People, and Classroom, with reviewable human-in-the-loop actions and a multi-provider LLM layer.',
+    stats: ['70+ API routes', '668 test cases', '50+ OAuth scopes'],
+    stack: ['FastAPI', 'React', 'TypeScript', 'LangGraph', 'Gemini', 'OpenAI', 'Docker'],
+    live: 'https://gwiz.yashkumarvaibhav.me',
+    date: 'May 2026 — Present',
   },
   {
-    label: 'Codeforces',
-    href: 'https://codeforces.com/profile/yashkumarvaibhav',
-    icon: codeforcesIcon,
+    index: '02',
+    title: 'Gut Microbiome Disease Prediction',
+    subtitle: 'ELECTRA transformer trained on microbial abundance sequences',
+    description:
+      'A three-stage PyTorch pipeline for disease-vs-control classification over a 16,721-sample corpus, including generator pretraining, discriminator pretraining, and supervised fine-tuning.',
+    stats: ['0.85 AUROC', '129 studies', '16,721 samples'],
+    stack: ['Python', 'PyTorch', 'Hugging Face', 'scikit-learn', 'Pandas'],
+    source: 'https://github.com/yashkumarvaibhav/DL-HumanGutMicrobiome',
+    date: 'Jan 2026 — May 2026',
   },
   {
-    label: 'LeetCode',
-    href: 'https://leetcode.com/u/yashkumarvaibhav/',
-    icon: leetcodeIcon,
-  },
-  {
-    label: 'Code360',
-    href: 'https://www.naukri.com/code360/profile/yashkrvaibhav',
-    icon: code360Icon,
+    index: '03',
+    title: 'IIIT Delhi Placement Tracker',
+    subtitle: 'Multi-batch placement analytics for IIIT Delhi students',
+    description:
+      'A full-stack platform that tracks companies, students, and multiple offers across placement batches, with program-level filters, CTC and stipend statistics, placement percentages, spreadsheet-backed imports, and authenticated administration.',
+    stats: ['Multi-batch data', 'Program-level analytics', 'Live deployment'],
+    stack: ['React', 'Express', 'PostgreSQL', 'Supabase', 'Google OAuth'],
+    live: 'https://yashkumarvaibhav.me/Placement_Tracker/',
+    date: '2025 — Present',
   },
 ];
 
-const signalCards = [
-  { label: 'Codeforces', value: 'Expert', detail: 'Rating 1718' },
-  { label: 'CodeChef', value: '4★', detail: 'Global Rank 7627' },
-  { label: 'Problem Solving', value: '500+', detail: 'LeetCode + Code360' },
-  { label: 'Placement Track', value: 'AIR 36', detail: 'Naukri EROH' },
-];
-
-const storyHighlights = [
-  { label: 'Primary languages', value: 'C++ · Java' },
-  { label: 'Current research', value: 'Microbiome Informatics Lab' },
-  { label: 'Competitive programming', value: 'Codeforces Expert' },
-  { label: 'Core strength', value: 'Backend systems + DSA' },
-];
-
-const aboutParagraphs = [
-  'I am currently pursuing M.Tech in Computer Science and Engineering at IIIT Delhi. My primary programming languages are C++ and Java. Previously, I completed B.E. in Computer Science and Engineering at Thapar Institute of Engineering and Technology, where I built a strong foundation in computer science fundamentals.',
-  'With over 500 unique DSA problems solved on LeetCode and Naukri Code360 and ranked Expert on Codeforces, I have a solid grasp of data structures, algorithms, and competitive programming. I am also ranked 4-star on CodeChef.',
-  'My journey reflects a strong commitment to learning and excellence, as shown by JEE Advanced 2019 (AIR 7.8K), JEE Main 2019, PGCAT 2025 (AIR 39), and CAT 2024. I am always excited to apply my skills to challenging, real-world problems and contribute meaningfully to the tech industry.',
-];
-
-const experienceBullets = [
-  'Designed and optimized C/C++ services for high-throughput backends with predictable latency.',
-  'Reduced system latency by 40% via custom data structures and algorithmic tuning.',
-  'Refactored performance-critical paths to achieve up to 500k transactions per second with sub-millisecond response.',
-  'Scaled data handling to nearly 5 TB per day using efficient concurrency and memory-conscious design.',
-  'Diagnosed race conditions and production bottlenecks, reducing downtime by 35%.',
-];
-
-const impactCards = [
-  { value: '40%', detail: 'Lower latency through systems and algorithmic optimization.' },
-  { value: '500k/s', detail: 'Peak transaction throughput after refactoring critical code paths.' },
-  { value: '35%', detail: 'Reduced downtime by resolving race conditions and bottlenecks.' },
-];
-
-const educationItems = [
+const experience = [
   {
-    institute: 'IIIT-Delhi',
-    course: 'M.Tech · Computer Science and Engineering',
-    meta: 'CGPA: 9.33 · New Delhi',
-    years: '2025 – 2027',
-    logo: iiitdLogo,
+    company: 'Scale AI (Outlier)',
+    role: 'Software Engineer, AI Training · Freelance',
+    date: 'Mar 2024 — Mar 2025',
+    detail:
+      'Evaluated model-generated code for correctness, repaired logic and functional mismatches, and delivered precise feedback to improve future model responses.',
   },
   {
-    institute: 'Thapar Institute of Engineering & Technology',
-    course: 'B.E. · Computer Science and Engineering',
-    meta: 'CGPA: 7.08 · Patiala, Punjab',
-    years: '2019 – 2023',
-    logo: tietLogo,
-  },
-  {
-    institute: 'Red Rose School',
-    course: 'Class XII · PCM',
-    meta: 'Percentage: 72.4% · Deoghar, Jharkhand',
-    years: '2017 – 2018',
-    logo: cbseLogo,
-  },
-  {
-    institute: 'Jawahar Navodaya Vidyalaya',
-    course: 'Class X',
-    meta: 'CGPA: 10 · Deoghar, Jharkhand',
-    years: '2015 – 2016',
-    logo: jnvLogo,
+    company: 'SivaTech Solutions',
+    role: 'Software Engineer · Intern → Contract',
+    date: 'Jan 2023 — Mar 2025',
+    detail:
+      'Joined as an intern and continued on contract, owning development of a proprietary C++ algorithmic-trading backend. Built performance-critical data structures, signal and order-execution logic, resolved legacy defects, and optimized low-latency paths for reliability and throughput.',
   },
 ];
 
-const skillBlocks = [
+const education = [
   {
-    title: 'Programming Languages',
-    items: ['C', 'C++', 'Java', 'Python (elementary)'],
+    school: 'IIIT Delhi',
+    degree: 'M.Tech, Computer Science & Engineering',
+    date: '2025 — Present',
+    score: 'CGPA 9.41',
   },
   {
-    title: 'Libraries / Frameworks',
-    items: ['JavaScript'],
+    school: 'Thapar Institute of Engineering & Technology',
+    degree: 'B.E., Computer Science & Engineering',
+    date: '2019 — 2023',
+    score: 'CGPA 7.08',
   },
   {
-    title: 'Core CS',
-    items: ['Data Structures', 'Algorithms'],
+    school: 'Red Rose School, Deoghar',
+    degree: 'Class XII · PCM · CBSE',
+    date: '2018',
+    score: '72.4%',
   },
   {
-    title: 'Databases',
-    items: ['MySQL', 'DBMS'],
+    school: 'Jawahar Navodaya Vidyalaya, Deoghar',
+    degree: 'Class X · CBSE',
+    date: '2016',
+    score: 'CGPA 10',
+  },
+];
+
+const skills = [
+  ['Languages', 'C, C++, Java, Python, SQL'],
+  ['Engineering', 'Backend development, algorithms, REST APIs, system design'],
+  ['Tools', 'Git/GitHub, Linux, Docker, Google Cloud Platform'],
+  ['AI workflow', 'Claude Code, Codex, GitHub Copilot'],
+];
+
+const recognition = [
+  {
+    label: 'Competitive programming',
+    items: ['Codeforces Expert · 1728 rating', 'CodeChef · 4 star', '500+ problems across LeetCode and Code360', 'TON MaraTON Challenge · Rank 60'],
+  },
+  {
+    label: 'Academic & national ranks',
+    items: ['IIIT Delhi Dean’s List · upcoming recipient', 'JEE Advanced 2019 · AIR 7789', 'Engineers’ Ring of Honour · AIR 36'],
   },
 ];
 
 const certifications = [
-  {
-    org: 'Coding Ninjas',
-    title: 'Data Structures and Algorithms in C++',
-    detail: 'Certificate of Excellence',
-    href: 'https://students.codingninjas.com/verify/24529aa44f42e089',
-  },
-  {
-    org: 'Coding Ninjas',
-    title: 'Competitive Programming',
-    detail: 'Certificate of Excellence',
-    href: 'https://students.codingninjas.com/verify/eb5cb0982588ac57',
-  },
+  ['Data Structures & Algorithms in C++', 'https://students.codingninjas.com/verify/24529aa44f42e089'],
+  ['Competitive Programming', 'https://students.codingninjas.com/verify/eb5cb0982588ac57'],
 ];
 
-const achievementColumns = [
-  {
-    kicker: 'Competitive Programming',
-    title: 'Ratings and ranks',
-    items: [
-      'Codeforces Expert · Rating 1718',
-      'CodeChef 4★ · Global Rank 7627',
-      'Winner, Mindscape 2021 hackathon (ACM Thapar)',
-      'Naukri EROH · AIR 36',
-    ],
-  },
-  {
-    kicker: 'Academic Benchmarks',
-    title: 'Exam and olympiad performance',
-    items: [
-      'JEE Advanced 2019 · AIR 7789',
-      'JEE Main 2019 · AIR 31k',
-      'NSO, IMO',
-      'NSTSE Statewide 5th rank holder (Bihar)',
-    ],
-  },
-];
-
-const contactItems = [
-  {
-    label: 'Primary email',
-    value: 'yashkumarvaibhav.official@gmail.com',
-    href: 'mailto:yashkumarvaibhav.official@gmail.com',
-    icon: gmailIcon,
-  },
-  {
-    label: 'Institute email',
-    value: 'yash25091@iiitd.ac.in',
-    href: 'mailto:yash25091@iiitd.ac.in',
-    icon: gmailIcon,
-  },
-  {
-    label: 'Phone',
-    value: '+91 62076 94270',
-    href: 'tel:+916207694270',
-    icon: phoneIcon,
-  },
-  {
-    label: 'WhatsApp',
-    value: 'Start a chat',
-    href: 'https://wa.me/916207694270',
-    icon: whatsappIcon,
-  },
-  {
-    label: 'LinkedIn',
-    value: 'Professional profile',
-    href: 'https://www.linkedin.com/in/yashkumarvaibhav/',
-    icon: linkedinIcon,
-  },
-  {
-    label: 'GitHub',
-    value: 'Code and projects',
-    href: 'https://github.com/yashkumarvaibhav',
-    icon: githubIcon,
-  },
-];
-
-const containerVariants = {
-  hidden: { opacity: 0, y: 18 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.22, 1, 0.36, 1],
-      staggerChildren: 0.08,
-    },
-  },
+const reveal = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
-};
-
-function SectionHeader({ eyebrow, title }) {
-  return (
-    <div className="section-header">
-      <p className="section-eyebrow">{eyebrow}</p>
-      <h2>{title}</h2>
-    </div>
-  );
+function Arrow() {
+  return <span aria-hidden="true">↗</span>;
 }
 
-function Card({ children, className = '' }) {
-  return (
-    <motion.article className={`glass-card ${className}`.trim()} variants={itemVariants}>
-      {children}
-    </motion.article>
-  );
+function SocialIcon({ type }) {
+  const paths = {
+    github: <><path d="M15 22v-3.9c.04-1-.35-1.75-.8-2.2 2.65-.3 5.43-1.3 5.43-5.9a4.6 4.6 0 0 0-1.23-3.2 4.3 4.3 0 0 0-.12-3.16S17.3 3.32 15 4.87a11 11 0 0 0-6 0C6.7 3.32 5.72 3.64 5.72 3.64A4.3 4.3 0 0 0 5.6 6.8 4.6 4.6 0 0 0 4.37 10c0 4.6 2.78 5.6 5.43 5.9-.35.4-.66 1.03-.77 1.8-.69.31-2.43.85-3.5-1 0 0-.64-1.16-1.85-1.24"/><path d="M9 21c-5 1.5-5-2.5-7-3"/></>,
+    linkedin: <><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"/><path d="M2 9h4v12H2zM4 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></>,
+    mail: <><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 7 9-7"/></>,
+    code: <><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></>,
+    brackets: <><path d="M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3M9 12h6"/></>,
+  };
+  return <svg viewBox="0 0 24 24" aria-hidden="true">{paths[type]}</svg>;
 }
 
-function Header() {
-  return (
-    <header className="topbar">
-      <a className="brand-lockup" href="#top">
-        <img src={iiitdLogo} alt="IIIT Delhi logo" className="brand-lockup__logo" />
-        <div>
-          <span className="brand-lockup__eyebrow">IIIT-Delhi</span>
-          <strong className="brand-lockup__name">Yash Kumar Vaibhav</strong>
-        </div>
-      </a>
+function CosmicCanvas() {
+  const canvasRef = useRef(null);
 
-      <nav className="nav-cluster" aria-label="Primary navigation">
-        {navLinks.map((link) => (
-          <a key={link.href} href={link.href}>
-            {link.label}
-          </a>
-        ))}
-      </nav>
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let width = 0;
+    let height = 0;
+    let frame = 0;
+    let animationFrame;
+    let particles = [];
+    const pointer = { x: 0, y: 0, active: false };
 
-      <a
-        className="tracker-button"
-        href="https://yashkumarvaibhav.me/Placement_Tracker/"
-        target="_blank"
-        rel="noreferrer"
-      >
-        IIIT Delhi Placement Tracker
-      </a>
-    </header>
-  );
+    const createParticles = () => {
+      const count = Math.min(120, Math.max(55, Math.floor((width * height) / 10500)));
+      particles = Array.from({ length: count }, (_, index) => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * (index % 5 === 0 ? 0.34 : 0.16),
+        vy: (Math.random() - 0.5) * (index % 5 === 0 ? 0.34 : 0.16),
+        radius: index % 11 === 0 ? 1.8 : Math.random() * 1.1 + 0.35,
+        alpha: Math.random() * 0.55 + 0.2,
+        depth: Math.random() * 0.8 + 0.2,
+      }));
+    };
+
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      width = rect.width;
+      height = rect.height;
+      canvas.width = width * ratio;
+      canvas.height = height * ratio;
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      createParticles();
+    };
+
+    const draw = () => {
+      context.clearRect(0, 0, width, height);
+      frame += reduceMotion ? 0 : 1;
+
+      particles.forEach((particle, index) => {
+        if (!reduceMotion) {
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+          if (particle.x < -10) particle.x = width + 10;
+          if (particle.x > width + 10) particle.x = -10;
+          if (particle.y < -10) particle.y = height + 10;
+          if (particle.y > height + 10) particle.y = -10;
+        }
+
+        const driftX = pointer.active ? (pointer.x - width / 2) * particle.depth * 0.018 : 0;
+        const driftY = pointer.active ? (pointer.y - height / 2) * particle.depth * 0.018 : 0;
+        const x = particle.x + driftX;
+        const y = particle.y + driftY;
+
+        context.beginPath();
+        context.arc(x, y, particle.radius, 0, Math.PI * 2);
+        context.fillStyle = index % 7 === 0
+          ? `rgba(63, 173, 168, ${particle.alpha + 0.2})`
+          : `rgba(255, 255, 255, ${particle.alpha})`;
+        context.fill();
+
+        for (let next = index + 1; next < Math.min(index + 12, particles.length); next += 1) {
+          const other = particles[next];
+          const otherX = other.x + (pointer.active ? (pointer.x - width / 2) * other.depth * 0.018 : 0);
+          const otherY = other.y + (pointer.active ? (pointer.y - height / 2) * other.depth * 0.018 : 0);
+          const distance = Math.hypot(x - otherX, y - otherY);
+          if (distance < 112) {
+            context.beginPath();
+            context.moveTo(x, y);
+            context.lineTo(otherX, otherY);
+            context.strokeStyle = `rgba(63, 173, 168, ${(1 - distance / 112) * 0.16})`;
+            context.lineWidth = 0.7;
+            context.stroke();
+          }
+        }
+      });
+
+      const sweep = ((frame * 2.1) % (width + 520)) - 260;
+      if (!reduceMotion) {
+        context.beginPath();
+        context.moveTo(sweep, height * 0.18);
+        context.lineTo(sweep - 190, height * 0.38);
+        context.strokeStyle = 'rgba(102, 220, 213, 0.5)';
+        context.lineWidth = 1.2;
+        context.stroke();
+      }
+
+      if (!reduceMotion) animationFrame = requestAnimationFrame(draw);
+    };
+
+    const onPointerMove = (event) => {
+      const rect = canvas.getBoundingClientRect();
+      pointer.x = event.clientX - rect.left;
+      pointer.y = event.clientY - rect.top;
+      pointer.active = true;
+    };
+    const onPointerLeave = () => { pointer.active = false; };
+
+    resize();
+    draw();
+    window.addEventListener('resize', resize);
+    canvas.addEventListener('pointermove', onPointerMove);
+    canvas.addEventListener('pointerleave', onPointerLeave);
+    return () => {
+      cancelAnimationFrame(animationFrame);
+      window.removeEventListener('resize', resize);
+      canvas.removeEventListener('pointermove', onPointerMove);
+      canvas.removeEventListener('pointerleave', onPointerLeave);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="cosmic-canvas" aria-hidden="true" />;
 }
 
-function MotionStrip() {
+function CosmicAchievements() {
   return (
-    <div className="motion-belt" aria-hidden="true">
-      <div className="motion-track">
-        {[...motionStrip, ...motionStrip].map((item, index) => (
-          <span key={`${item}-${index}`} className="motion-pill">
-            {item}
-          </span>
-        ))}
+    <div className="cosmic-achievements" aria-label="Career highlights">
+      <div className="achievement-planet achievement-planet--problems">
+        <div><strong>500+</strong><span>LeetCode + Code360</span><small>problems solved</small></div>
+      </div>
+      <div className="achievement-planet achievement-planet--rating">
+        <div><strong>1728</strong><span>Codeforces</span><small>Expert rating</small></div>
+      </div>
+      <div className="achievement-planet achievement-planet--dean">
+        <div><strong>Dean’s List</strong><span>IIIT Delhi</span><small>upcoming recipient</small></div>
+      </div>
+      <div className="achievement-planet achievement-planet--eroh">
+        <div><strong>AIR 36</strong><span>Naukri EROH</span><small>national rank</small></div>
+      </div>
+      <div className="achievement-planet achievement-planet--codechef">
+        <div><strong>4★</strong><span>CodeChef</span><small>competitive programming</small></div>
+      </div>
+      <div className="achievement-planet achievement-planet--jee-advanced">
+        <div><strong>AIR 7.8K</strong><span>JEE Advanced</span><small>2019</small></div>
+      </div>
+      <div className="achievement-planet achievement-planet--jee-main">
+        <div><strong>Qualified</strong><span>JEE Main</span><small>2019</small></div>
       </div>
     </div>
   );
 }
 
-function SocialRow() {
+function CosmicObjects() {
   return (
-    <div className="social-row">
-      {socialLinks.map((social) => (
-        <motion.a
-          key={social.label}
-          className="social-pill"
-          href={social.href}
-          target="_blank"
-          rel="noreferrer"
-          whileHover={{ y: -3 }}
-        >
-          <img src={social.icon} alt={social.label} />
-          <span>{social.label}</span>
-        </motion.a>
-      ))}
+    <div className="cosmic-objects" aria-hidden="true">
+      <div className="galaxy"><i /><i /><i /></div>
+      <div className="ringed-planet"><span /></div>
+      <div className="crater-moon"><i /><i /><i /></div>
+      <div className="asteroid-belt">{Array.from({ length: 12 }, (_, index) => <i key={index} />)}</div>
+      <div className="meteor meteor--one" />
+      <div className="meteor meteor--two" />
     </div>
   );
 }
 
-function SkillsSection() {
+function SectionHeading({ label, title, intro }) {
   return (
-    <div className="skills-stack">
-      <motion.article className="skills-hero-card" variants={itemVariants} whileHover={{ y: -4 }}>
-        <div>
-          <span className="card-eyebrow">Programming Languages</span>
-          <h3>Strong systems-oriented programming foundation.</h3>
-          <p>Comfortable with performance-sensitive implementation and problem-solving heavy workflows.</p>
-        </div>
-
-        <div className="skill-chip-row">
-          {skillBlocks[0].items.map((item) => (
-            <span key={item} className="skill-chip">{item}</span>
-          ))}
-        </div>
-      </motion.article>
-
-      <div className="skills-subgrid">
-        {skillBlocks.slice(1).map((block) => (
-          <motion.article key={block.title} className="skills-mini-card" variants={itemVariants} whileHover={{ y: -4 }}>
-            <span className="card-eyebrow">{block.title}</span>
-            <div className="skill-chip-row compact">
-              {block.items.map((item) => (
-                <span key={item} className="skill-chip compact">{item}</span>
-              ))}
-            </div>
-          </motion.article>
-        ))}
+    <motion.header className="section-heading" variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.4 }}>
+      <p className="eyebrow">{label}</p>
+      <div>
+        <h2>{title}</h2>
+        {intro && <p>{intro}</p>}
       </div>
-    </div>
+    </motion.header>
   );
 }
 
-function CertificationsGrid() {
+function App() {
   return (
-    <div className="split-grid">
-      {certifications.map((item) => (
-        <motion.article key={item.title} className="info-card" variants={itemVariants} whileHover={{ y: -4 }}>
-          <span className="card-eyebrow">{item.org}</span>
-          <h3>{item.title}</h3>
-          <p>{item.detail}</p>
-          <a href={item.href} target="_blank" rel="noreferrer">
-            View credential
-          </a>
-        </motion.article>
-      ))}
-    </div>
-  );
-}
-
-function AchievementsGrid() {
-  return (
-    <div className="split-grid">
-      {achievementColumns.map((column) => (
-        <motion.article key={column.title} className="info-card" variants={itemVariants} whileHover={{ y: -4 }}>
-          <span className="card-eyebrow">{column.kicker}</span>
-          <h3>{column.title}</h3>
-          <ul className="detail-list compact-list">
-            {column.items.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </motion.article>
-      ))}
-    </div>
-  );
-}
-
-function ContactSection() {
-  return (
-    <div className="contact-layout">
-      <motion.div className="contact-list" variants={containerVariants}>
-        {contactItems.map((item) => (
-          <motion.a
-            key={item.label}
-            href={item.href}
-            target={item.href.startsWith('http') ? '_blank' : undefined}
-            rel={item.href.startsWith('http') ? 'noreferrer' : undefined}
-            className="contact-card"
-            variants={itemVariants}
-            whileHover={{ y: -4 }}
-          >
-            <img src={item.icon} alt={item.label} />
-            <div>
-              <span>{item.label}</span>
-              <strong>{item.value}</strong>
-            </div>
-          </motion.a>
-        ))}
-      </motion.div>
-
-      <motion.aside className="contact-cta" variants={itemVariants} whileHover={{ y: -4 }}>
-        <span className="card-eyebrow">Based in</span>
-        <h3>New Delhi, India</h3>
-        <p>Open to remote and on-site opportunities, research collaborations, and advanced systems work.</p>
-        <a
-          className="primary-button"
-          href="https://yashkumarvaibhav.me/Placement_Tracker/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Open Placement Tracker
+    <div className="site-shell" id="top">
+      <header className="site-header">
+        <a className="wordmark" href="#top" aria-label="Yash Kumar Vaibhav, home">
+          YKV<span>.</span>
         </a>
-      </motion.aside>
-    </div>
-  );
-}
+        <nav aria-label="Primary navigation">
+          <a href="#work">Work</a>
+          <a href="#experience">Experience</a>
+          <a href="#about">About</a>
+        </nav>
+        <a className="header-contact" href="mailto:yashkumarvaibhav.official@gmail.com">
+          Let’s talk <Arrow />
+        </a>
+      </header>
 
-function HybridVersion() {
-  return (
-    <>
-      <Header />
-
-      <main className="page-layout">
-        <section className="hero-panel hero-panel--hybrid" id="top">
-          <div className="hero-copy hero-copy--hybrid">
-            <span className="section-eyebrow">IIIT Delhi · M.Tech CSE</span>
-            <h1>Hi, I'm Yash Kumar Vaibhav.</h1>
-            <p className="hero-description">
-              I am pursuing M.Tech in Computer Science and Engineering at IIIT Delhi. I enjoy competitive
-              programming, problem solving, software development, and currently work on deep learning for the human
-              gut microbiome at the Microbiome Informatics Lab.
+      <main>
+        <section className="hero" aria-labelledby="hero-title">
+          <CosmicCanvas />
+          <div className="cosmic-grid" aria-hidden="true" />
+          <CosmicObjects />
+          <motion.div className="hero-copy" initial="hidden" animate="visible" variants={reveal}>
+            <p className="eyebrow"><span className="status-dot" /> New Delhi, India · Open to opportunities</p>
+            <h1 id="hero-title">I build reliable software for difficult problems.</h1>
+            <p className="hero-intro">
+              I’m Yash, a software engineer and M.Tech CSE student at IIIT Delhi. My work spans C++ backend systems, full-stack applications, applied deep learning, and algorithms.
             </p>
-
             <div className="hero-actions">
-              <a className="primary-button" href="#contact">Contact me</a>
-              <a className="secondary-button" href={resumePdf} download>
-                Download resume
-              </a>
+              <a className="button button--primary" href="#work">Explore my work <span aria-hidden="true">↓</span></a>
+              <a className="button button--quiet" href={resumeUrl} target="_blank" rel="noreferrer">Read résumé <Arrow /></a>
             </div>
-
-            <MotionStrip />
-
-            <div className="badge-cloud badge-cloud--hybrid">
-              {heroBadges.slice(0, 4).map((badge) => (
-                <span key={badge} className="badge-pill">{badge}</span>
+            <div className="hero-socials" aria-label="Profile links">
+              {heroLinks.map(([type, label, href]) => (
+                <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noreferrer' : undefined} key={label} aria-label={label} title={label}>
+                  <SocialIcon type={type} /><span>{label}</span>
+                </a>
               ))}
             </div>
-
-            <SocialRow />
-          </div>
-
-          <div className="hero-dashboard">
-            <motion.div className="portrait-card portrait-card--hybrid" whileHover={{ y: -6 }}>
-              <div className="portrait-card__frame">
-                <img src={myPhoto} alt="Yash Kumar Vaibhav" />
-              </div>
-            </motion.div>
-
-            <motion.article className="hero-module hero-module--research" variants={itemVariants} whileHover={{ y: -4 }}>
-              <div>
-                <span className="card-eyebrow">Research Track</span>
-                <h3>Deep Learning on Human Gut Microbiome</h3>
-                <p>Microbiome Informatics Lab · Prof. Tarini Shankar Ghosh</p>
-              </div>
-              <div className="hero-module__meta">
-                <span>Human gut microbiome</span>
-                <span>Deep learning models</span>
-                <span>IIIT Delhi</span>
-              </div>
-            </motion.article>
-
-            <motion.article className="hero-module hero-module--tracker" variants={itemVariants} whileHover={{ y: -4 }}>
-              <div>
-                <span className="card-eyebrow">Live Product</span>
-                <h3>IIIT Delhi Placement Tracker</h3>
-                <p>A simple tool to follow company updates, deadlines, and role snapshots.</p>
-              </div>
-              <div className="tracker-preview tracker-preview--hero">
-                <span>Company pipeline</span>
-                <span>Deadlines and links</span>
-                <span>Role snapshots</span>
-              </div>
-              <a
-                className="secondary-button"
-                href="https://yashkumarvaibhav.me/Placement_Tracker/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Open tracker
-              </a>
-            </motion.article>
-
-            <motion.div className="signal-grid signal-grid--hybrid" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
-              {signalCards.map((card) => (
-                <motion.article key={card.label} className="signal-tile" variants={itemVariants} whileHover={{ y: -4 }}>
-                  <span>{card.label}</span>
-                  <strong>{card.value}</strong>
-                  <p>{card.detail}</p>
-                </motion.article>
-              ))}
-            </motion.div>
-          </div>
+          </motion.div>
+          <motion.div className="hero-identity" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .8, delay: .2, ease: [0.22, 1, 0.36, 1] }}>
+            <div className="identity-orbit" aria-hidden="true"><span /><span /><span /></div>
+            <div className="hero-portrait-wrap">
+              <img src={portrait} alt="Yash Kumar Vaibhav" />
+              <span className="portrait-scan" aria-hidden="true" />
+            </div>
+            <div className="identity-caption">
+              <div><span>Yash Kumar Vaibhav</span><strong>Software Engineer</strong></div>
+              <div><span>Currently</span><strong>M.Tech CSE · IIIT Delhi</strong></div>
+            </div>
+            <CosmicAchievements />
+          </motion.div>
+          <div className="hero-coordinate" aria-hidden="true">28.6139° N / 77.2090° E</div>
         </section>
 
-        <motion.section className="content-panel" id="about" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
-          <SectionHeader eyebrow="Profile" title="A cleaner story of backend engineering, research, and academic rigor." />
-
-          <div className="story-layout">
-            <motion.div className="story-copy" variants={itemVariants}>
-              {aboutParagraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </motion.div>
-
-            <motion.div className="story-highlight-grid" variants={containerVariants}>
-              {storyHighlights.map((item) => (
-                <motion.article key={item.label} className="story-highlight" variants={itemVariants} whileHover={{ x: 4 }}>
-                  <span>{item.label}</span>
-                  <strong>{item.value}</strong>
-                </motion.article>
-              ))}
-            </motion.div>
-          </div>
-        </motion.section>
-
-        <motion.section className="content-panel" id="experience" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
-          <SectionHeader eyebrow="Experience" title="High-throughput backend work with concrete system impact." />
-
-          <div className="experience-layout">
-            <Card className="experience-card">
-              <div className="experience-card__top">
-                <div>
-                  <span className="card-eyebrow">SivaTech Solutions</span>
-                  <h3>Software Engineer</h3>
+        <section className="section" id="work">
+          <SectionHeading label="01 / Selected work" title="Projects built end to end." intro="Backend software, applied deep learning, and a full-stack campus placement platform." />
+          <div className="project-list">
+            {projects.map((project) => (
+              <motion.article className="project-card" key={project.title} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
+                <div className="project-number">{project.index}</div>
+                <div className="project-main">
+                  <div className="project-meta"><span>{project.date}</span><span>Featured project</span></div>
+                  <h3>{project.title}</h3>
+                  <p className="project-subtitle">{project.subtitle}</p>
+                  <p className="project-description">{project.description}</p>
+                  <div className="project-stats">
+                    {project.stats.map((stat) => <span key={stat}>{stat}</span>)}
+                  </div>
+                  <div className="tag-row">
+                    {project.stack.map((item) => <span key={item}>{item}</span>)}
+                  </div>
                 </div>
-                <span className="date-pill">Jan 2023 – Jun 2025 · Mumbai</span>
-              </div>
-
-              <ul className="detail-list">
-                {experienceBullets.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </Card>
-
-            <motion.div className="impact-column" variants={containerVariants}>
-              {impactCards.map((item) => (
-                <motion.article key={item.value} className="impact-card" variants={itemVariants} whileHover={{ y: -4 }}>
-                  <strong>{item.value}</strong>
-                  <p>{item.detail}</p>
-                </motion.article>
-              ))}
-            </motion.div>
-          </div>
-        </motion.section>
-
-        <motion.section className="content-panel" id="education" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
-          <SectionHeader eyebrow="Education" title="Structured academic growth across institutes and school years." />
-
-          <div className="education-grid">
-            {educationItems.map((item) => (
-              <motion.article key={item.institute} className="education-card" variants={itemVariants} whileHover={{ y: -4 }}>
-                <div>
-                  <span className="card-eyebrow">{item.institute}</span>
-                  <h3>{item.course}</h3>
-                  <p>{item.meta}</p>
-                </div>
-                <div className="education-card__side">
-                  <img src={item.logo} alt={item.institute} />
-                  <span className="date-pill">{item.years}</span>
+                <div className="project-links">
+                  {project.live && <a href={project.live} target="_blank" rel="noreferrer">Live demo <Arrow /></a>}
+                  {project.source && <a href={project.source} target="_blank" rel="noreferrer">Source <Arrow /></a>}
                 </div>
               </motion.article>
             ))}
           </div>
-        </motion.section>
+        </section>
 
-        <motion.section className="content-panel" id="skills" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
-          <SectionHeader eyebrow="Skills" title="A toolkit presented as a designed system rather than a generic tag dump." />
-          <SkillsSection />
-        </motion.section>
+        <section className="section section--soft" id="experience">
+          <SectionHeading label="02 / Experience" title="C++ systems and AI training experience." />
+          <div className="timeline">
+            {experience.map((item) => (
+              <motion.article className="timeline-item" key={`${item.company}-${item.date}`} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.35 }}>
+                <p className="timeline-date">{item.date}</p>
+                <div><h3>{item.company}</h3><p className="timeline-role">{item.role}</p></div>
+                <p className="timeline-detail">{item.detail}</p>
+              </motion.article>
+            ))}
+          </div>
+        </section>
 
-        <motion.section className="content-panel" id="certifications" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
-          <SectionHeader eyebrow="Certifications" title="Recognition that supports the competitive and academic side of the profile." />
-          <CertificationsGrid />
-        </motion.section>
+        <section className="section credentials-grid" id="about">
+          <div>
+            <p className="eyebrow">Education</p>
+            {education.map((item) => (
+              <article className="education-item" key={item.school}>
+                <div><h3>{item.school}</h3><p>{item.degree}</p></div>
+                <div><strong>{item.score}</strong><span>{item.date}</span></div>
+              </article>
+            ))}
+          </div>
+          <div>
+            <p className="eyebrow">Capabilities</p>
+            <dl className="skills-list">
+              {skills.map(([term, description]) => <div key={term}><dt>{term}</dt><dd>{description}</dd></div>)}
+            </dl>
+          </div>
+        </section>
 
-        <motion.section className="content-panel" id="achievements" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
-          <SectionHeader eyebrow="Achievements" title="Competitive and academic markers placed in a cleaner, editorial layout." />
-          <AchievementsGrid />
-        </motion.section>
+        <section className="section recognition-section" id="recognition">
+          <SectionHeading label="03 / Recognition" title="Signals beyond the project list." intro="Competitive programming and academic performance that reinforce the engineering work." />
+          <div className="recognition-grid">
+            {recognition.map((group) => (
+              <motion.article key={group.label} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true, amount: .3 }}>
+                <p className="eyebrow">{group.label}</p>
+                <ul>{group.items.map((item) => <li key={item}>{item}</li>)}</ul>
+              </motion.article>
+            ))}
+          </div>
+          <div className="certification-row">
+            <span>Certificates of Excellence</span>
+            {certifications.map(([title, href]) => <a href={href} target="_blank" rel="noreferrer" key={title}>{title} <Arrow /></a>)}
+          </div>
+        </section>
 
-        <motion.section className="content-panel" id="contact" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
-          <SectionHeader eyebrow="Contact" title="Reach out for research, roles, backend systems work, or collaboration." />
-          <ContactSection />
-        </motion.section>
+        <section className="contact-section" id="contact">
+          <p className="eyebrow">Have a hard problem?</p>
+          <h2>Let’s solve something difficult.</h2>
+          <a href="mailto:yashkumarvaibhav.official@gmail.com">yashkumarvaibhav.official@gmail.com <Arrow /></a>
+        </section>
       </main>
-    </>
-  );
-}
 
-export default function App() {
-  return (
-    <div className="site-root">
-      <div className="ambient ambient-a" />
-      <div className="ambient ambient-b" />
-      <HybridVersion />
+      <footer>
+        <span>© {new Date().getFullYear()} Yash Kumar Vaibhav</span>
+        <span>Designed and built with care.</span>
+        <a href="#top">Back to top ↑</a>
+      </footer>
     </div>
   );
 }
+
+export default App;
