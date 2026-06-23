@@ -5,6 +5,8 @@ import portrait from '../myPhoto.png';
 
 const resumeUrl = 'https://drive.google.com/file/d/1tcMk7e5Wb2hNuMk0wINL136-hengflT1/view?usp=sharing';
 
+const phone = { display: '+91 62076 94270', tel: 'tel:+916207694270', whatsapp: 'https://wa.me/916207694270' };
+
 const links = {
   github: 'https://github.com/yashkumarvaibhav',
   linkedin: 'https://www.linkedin.com/in/yashkumarvaibhav/',
@@ -19,6 +21,7 @@ const heroLinks = [
   ['code', 'Codeforces', links.codeforces],
   ['brackets', 'LeetCode', links.leetcode],
   ['mail', 'Email', 'mailto:yashkumarvaibhav.official@gmail.com'],
+  ['whatsapp', 'WhatsApp', phone.whatsapp],
 ];
 
 const projects = [
@@ -140,6 +143,8 @@ function SocialIcon({ type }) {
     mail: <><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 7 9-7"/></>,
     code: <><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></>,
     brackets: <><path d="M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3M9 12h6"/></>,
+    whatsapp: <><path d="M3 21l1.7-3.9a8.5 8.5 0 1 1 3.3 2.9z"/><path d="M9 8.5c0 4 2.5 6.5 6.5 6.5.5 0 .9-.4.9-.9v-1l-2-.8-1 1a6 6 0 0 1-2.7-2.7l1-1-.8-2h-1c-.5 0-.9.4-.9.9z"/></>,
+    phone: <><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.8.4 1.6.7 2.3a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.7-1.3a2 2 0 0 1 2.1-.4c.7.3 1.5.6 2.3.7a2 2 0 0 1 1.8 2z"/></>,
   };
   return <svg viewBox="0 0 24 24" aria-hidden="true">{paths[type]}</svg>;
 }
@@ -469,6 +474,8 @@ function App() {
           <p className="eyebrow">Have a hard problem?</p>
           <h2>Let’s solve something difficult.</h2>
           <a href="mailto:yashkumarvaibhav.official@gmail.com">yashkumarvaibhav.official@gmail.com <Arrow /></a>
+          <a href={phone.whatsapp} target="_blank" rel="noreferrer">WhatsApp {phone.display} <Arrow /></a>
+          <a href={phone.tel}>Mobile {phone.display} <Arrow /></a>
         </section>
       </main>
 
