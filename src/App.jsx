@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import portrait from '../myPhoto.png';
 
@@ -131,6 +131,8 @@ const reveal = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
 };
+
+const introName = 'yashkumarvaibhav';
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
@@ -329,6 +331,55 @@ function CosmicObjects() {
   );
 }
 
+function IntroLoader() {
+  return (
+    <motion.div
+      className="intro-loader"
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0, y: -18 }}
+      transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+      role="status"
+      aria-label="Loading Yash Kumar Vaibhav portfolio"
+    >
+      <div className="intro-loader__grid" aria-hidden="true" />
+      <div className="intro-loader__stars" aria-hidden="true" />
+      <div className="intro-loader__planet intro-loader__planet--large" aria-hidden="true" />
+      <div className="intro-loader__planet intro-loader__planet--small" aria-hidden="true" />
+      <div className="intro-loader__meteor intro-loader__meteor--one" aria-hidden="true" />
+      <div className="intro-loader__meteor intro-loader__meteor--two" aria-hidden="true" />
+      <div className="intro-loader__beam" aria-hidden="true" />
+      <motion.div
+        className="intro-loader__content"
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <span className="intro-loader__label">Portfolio loading</span>
+        <div className="intro-loader__name-wrap">
+          <span className="intro-loader__orbit" aria-hidden="true">
+            <span />
+          </span>
+          <motion.p
+            className="intro-loader__name"
+            initial={{ opacity: 0, y: 18, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.85, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {introName}
+          </motion.p>
+        </div>
+        <div className="intro-loader__track" aria-hidden="true">
+          <motion.span
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 1.6, delay: 0.38, ease: [0.22, 1, 0.36, 1] }}
+          />
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 function SectionHeading({ label, title, intro }) {
   return (
     <motion.header className="section-heading" variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.4 }}>
@@ -342,8 +393,40 @@ function SectionHeading({ label, title, intro }) {
 }
 
 function App() {
+  const [introComplete, setIntroComplete] = useState(false);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const timer = window.setTimeout(() => setIntroComplete(true), prefersReducedMotion ? 3200 : 3800);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('intro-lock', !introComplete);
+    document.body.classList.toggle('intro-lock', !introComplete);
+    return () => {
+      document.documentElement.classList.remove('intro-lock');
+      document.body.classList.remove('intro-lock');
+    };
+  }, [introComplete]);
+
   return (
-    <div className="site-shell" id="top">
+    <>
+    <AnimatePresence>
+      {!introComplete && <IntroLoader />}
+    </AnimatePresence>
+
+    <motion.div
+      className="site-shell"
+      id="top"
+      initial={false}
+      animate={introComplete ? 'loaded' : 'loading'}
+      variants={{
+        loading: { opacity: 0, scale: 0.992 },
+        loaded: { opacity: 1, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+      }}
+      aria-busy={!introComplete}
+    >
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="Yash Kumar Vaibhav, home">
           yashkumarvaibhav
@@ -363,7 +446,7 @@ function App() {
           <CosmicCanvas />
           <div className="cosmic-grid" aria-hidden="true" />
           <CosmicObjects />
-          <motion.div className="hero-copy" initial="hidden" animate="visible" variants={reveal}>
+          <motion.div className="hero-copy" initial="hidden" animate={introComplete ? 'visible' : 'hidden'} variants={reveal}>
             <p className="eyebrow"><span className="status-dot" /> New Delhi, India · Open to opportunities</p>
             <h1 id="hero-title">I build reliable software for difficult problems.</h1>
             <p className="hero-intro">
@@ -381,7 +464,7 @@ function App() {
               ))}
             </div>
           </motion.div>
-          <motion.div className="hero-identity" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .8, delay: .2, ease: [0.22, 1, 0.36, 1] }}>
+          <motion.div className="hero-identity" initial={{ opacity: 0, x: 40 }} animate={introComplete ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }} transition={{ duration: .8, delay: .2, ease: [0.22, 1, 0.36, 1] }}>
             <div className="identity-orbit" aria-hidden="true"><span /><span /><span /></div>
             <div className="hero-portrait-wrap">
               <img src={portrait} alt="Yash Kumar Vaibhav" />
@@ -484,7 +567,8 @@ function App() {
         <span>Designed and built with care.</span>
         <a href="#top">Back to top ↑</a>
       </footer>
-    </div>
+    </motion.div>
+    </>
   );
 }
 
