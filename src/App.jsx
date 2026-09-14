@@ -87,6 +87,40 @@ const projects = [
     source: 'https://github.com/yashkumarvaibhav/DL-HumanGutMicrobiome',
     date: 'Jan 2026 — May 2026',
   },
+  {
+    index: '06',
+    title: 'VajraKavach',
+    subtitle: 'Security-hardened professional networking platform',
+    description:
+      'A team course project for Foundations of Computer Security at IIIT-Delhi: a professional-networking platform engineered around a threat model, then attacked by the rest of the class. Messages are end-to-end encrypted in the browser, so the server stores only ciphertext, behind Argon2id, revocable JWT sessions, mandatory TOTP 2FA and a hardened nginx edge.',
+    stats: ['End-to-end encryption', 'Mandatory TOTP 2FA', '3 VAPT rounds remediated'],
+    stack: ['FastAPI', 'PostgreSQL', 'React', 'Nginx', 'Web Crypto API'],
+    live: 'https://vajrakavach.yashkumarvaibhav.me',
+    source: 'https://github.com/yashkumarvaibhav/VajraKavach',
+    date: 'Feb 2026 — Apr 2026',
+  },
+  {
+    index: '07',
+    title: 'CoExist Alert',
+    subtitle: 'Edge early-warning platform for human–wildlife conflict',
+    description:
+      'Team GitBoosters’ submission to the Code with Cisco 2026 Silver Flag CSR Challenge. The sensor field is simulated; Cisco Webex dispatch to the nearest guard is live. Confirmation, node health and the alert cascade are pure state machines, unacknowledged alerts escalate responder tiers, and a dead sensor raises its own blind-spot alert. Delivered through a spec-driven AI-agent workflow.',
+    stats: ['280 unit tests', '18 Playwright specs', 'Live Webex dispatch'],
+    stack: ['Next.js', 'TypeScript', 'SQLite', 'Drizzle', 'Cisco Webex', 'Playwright'],
+    live: 'https://coexist.yashkumarvaibhav.me',
+    date: 'Jul 2026',
+  },
+  {
+    index: '08',
+    title: 'TradeVault',
+    subtitle: 'Trading journal & risk workbench',
+    description:
+      'A multi-tenant trading journal with a Monte-Carlo risk engine that resamples the trader’s own realised R-multiples. A seeded PRNG makes each simulation byte-identical for a given seed and input, position sizes are computed with the Kelly criterion two ways, and every result carries the label “historical scenario, not a forecast”. Delivered through a spec-driven AI-agent workflow.',
+    stats: ['158 unit tests', '19 Playwright specs', '12 migrations'],
+    stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Drizzle', 'Web Workers', 'Vitest'],
+    live: 'https://tradevault.yashkumarvaibhav.me',
+    date: 'Feb 2026 — Jun 2026',
+  },
 ];
 
 const experience = [
