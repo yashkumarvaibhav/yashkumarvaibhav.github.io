@@ -93,7 +93,7 @@ const projects = [
     subtitle: 'Security-hardened professional networking platform',
     description:
       'A team course project for Foundations of Computer Security at IIIT-Delhi, then attacked by the rest of the class. Messages are end-to-end encrypted in the browser, so the server stores only ciphertext, behind Argon2id, revocable JWT sessions, mandatory TOTP 2FA, a hash-chained audit log and a hardened nginx edge.',
-    stats: ['End-to-end encryption', 'TOTP 2FA', '3 VAPT rounds remediated'],
+    stats: ['Defense: 1st of 25 teams', 'Offense: 1st of 82 testers', 'TOTP 2FA'],
     stack: ['FastAPI', 'PostgreSQL', 'React', 'Nginx', 'Web Crypto API'],
     live: 'https://vajrakavach.yashkumarvaibhav.me',
     source: 'https://github.com/yashkumarvaibhav/VajraKavach',
