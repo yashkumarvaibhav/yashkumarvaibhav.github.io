@@ -86,7 +86,7 @@ Do not use it as the primary accent on white pages.
 | Portfolio hero `h1` | `clamp(3.7rem, 6.8vw, 7rem)` | `0.88` | `-0.055em` |
 | Portfolio section `h2` | `clamp(2.2rem, 3.8vw, 3.6rem)` | `0.98` | `-0.045em` |
 | Portfolio contact `h2` | `clamp(2.8rem, 5.4vw, 5.25rem)` | `0.98` | `-0.045em` |
-| Portfolio project title `h3` | `clamp(1.85rem, 2.8vw, 2.75rem)` | `1` | `-0.035em` |
+| Portfolio project title `h3` | `clamp(1.6rem, 2.2vw, 2.1rem)` | `1.05` | `-0.03em` |
 | `h2` | `1.7rem` | — | slight negative |
 | `h3` | `1.1rem` | — | — |
 | Body | `1rem` | `1.65` | normal |
@@ -154,7 +154,8 @@ text contrast.
 
 - Maximum content width: `1240px`.
 - Use large vertical spacing (`90–120px`) and hairline dividers instead of boxed dashboards.
-- Project entries are editorial rows, not generic card grids.
+- Projects sit in a two-column hairline grid (one column below 1280px). Every entry is the
+  same height, with stats and tags aligned at the bottom, so descriptions are kept to a similar length.
 - Soft grey is reserved for alternating section emphasis.
 - Keep one clear purpose per section: work, experience, credentials, recognition, contact.
 

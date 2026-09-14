@@ -35,11 +35,11 @@ const projects = [
   {
     index: '01',
     title: 'Sentinel',
-    subtitle: 'Observability, anomaly detection & reversible remediation platform',
+    subtitle: 'Observability & reversible remediation platform',
     description:
-      'A Python observability platform that separates the part of a traffic surge an event explains from the part it cannot, and acts only on what a deterministic verifier confirms. Measured on a lab testbed with real telemetry, injected faults and held-out replays; specified in a numbered decision log and delivered through a spec-driven AI-agent workflow.',
+      'A Python observability platform that separates what an event explains in a traffic surge from what it cannot, and acts only on what a deterministic verifier confirms. Measured on a lab testbed with real telemetry, injected faults and held-out replays; delivered through a spec-driven AI-agent workflow.',
     stats: ['16.8 s autonomous MTTR', '0 false actions', '1,000+ tests'],
-    stack: ['Python', 'FastAPI', 'Kafka', 'ClickHouse', 'PostgreSQL', 'Kubernetes', 'OpenTelemetry'],
+    stack: ['Python', 'Kafka', 'ClickHouse', 'PostgreSQL', 'Kubernetes', 'OpenTelemetry'],
     live: 'https://sentinel.yashkumarvaibhav.me',
     date: 'Jul 2026 — Present',
   },
@@ -48,7 +48,7 @@ const projects = [
     title: 'GWiz',
     subtitle: 'Human-in-the-loop LLM assistant for Google Workspace',
     description:
-      'A team-built LLM assistant that works inside a user’s own Google Workspace, where nothing that changes mail or calendar runs without explicit approval. I owned the FastAPI backend: LangGraph approval flows that pause until the user decides, and OAuth 2.0 across ten Workspace APIs.',
+      'A team-built LLM assistant that works inside a user’s own Google Workspace, where nothing that changes mail or calendar runs without explicit approval. I owned the FastAPI backend: LangGraph approval flows that pause until the user decides, OAuth 2.0 across ten Workspace APIs, and replayable LLM test tapes.',
     stats: ['100+ API routes', '750+ tests', '50 OAuth scopes'],
     stack: ['FastAPI', 'React', 'TypeScript', 'LangGraph', 'Gemini', 'OpenAI', 'Docker'],
     live: 'https://gwiz.yashkumarvaibhav.me',
@@ -59,7 +59,7 @@ const projects = [
     title: 'Job Pilot',
     subtitle: 'Multi-tenant job-search CRM & outreach engine',
     description:
-      'A multi-tenant CRM that runs a job search end to end — companies, contacts, applications, referrals, email sequences and analytics — driven by deterministic automation and publicly deployed with open signup. Every automated Gmail send waits on per-message approval and a thread-proof stamp. I specified it as 50+ engineering tasks across seven phases and delivered it through a spec-driven AI-agent workflow.',
+      'A multi-tenant CRM that runs a job search end to end with deterministic automation, publicly deployed with open signup. Every automated Gmail send waits on per-message approval and a thread-proof stamp. I specified it as 50+ engineering tasks and delivered it through a spec-driven AI-agent workflow.',
     stats: ['880+ tests', '31 migrations', '60+ design decisions'],
     stack: ['Next.js', 'TypeScript', 'Node.js', 'SQLite', 'Drizzle', 'Gmail API', 'Vitest'],
     live: 'https://jobpilot.yashkumarvaibhav.me',
@@ -70,7 +70,7 @@ const projects = [
     title: 'Setu',
     subtitle: 'Federated data integration over heterogeneous sources',
     description:
-      'Answers “is this vehicle insured right now?” by querying five autonomous registries at query time, on entirely synthetic data. A source that did not answer is a different type from one that answered nothing, so an outage never becomes a wrong verdict. A course project at IIIT-Delhi: I led a four-person team and delivered it through a spec-driven AI-agent workflow.',
+      'Answers “is this vehicle insured right now?” by querying five autonomous registries on synthetic data. A source that did not answer is a different type from one that answered nothing, so an outage never becomes a wrong verdict. A four-person IIIT-Delhi course project I led, delivered through a spec-driven AI-agent workflow.',
     stats: ['1,100+ tests', '5 sources, 4 storage engines', '53 ms vs 138 ms serial'],
     stack: ['Python', 'FastAPI', 'PostgreSQL', 'MariaDB', 'SQLite', 'asyncio'],
     live: 'https://setu.yashkumarvaibhav.me',
@@ -79,10 +79,10 @@ const projects = [
   {
     index: '05',
     title: 'Gut Microbiome Disease Prediction',
-    subtitle: 'ELECTRA transformer trained on microbial abundance sequences',
+    subtitle: 'ELECTRA transformers trained from scratch',
     description:
-      'Self-supervised ELECTRA transformers trained from scratch in PyTorch on a 16,721-sample, 129-study corpus, treating each species as a token. A leave-one-study-out evaluation exposed the study batch effects that a within-study score hides.',
-    stats: ['16,721 samples', '0.85 AUROC within-study', '0.63 AUROC on held-out studies'],
+      'Self-supervised ELECTRA transformers trained in PyTorch on a 16,721-sample, 129-study corpus, treating each species as a token, across a 15-configuration grid with 10-seed ensembles on an NVIDIA RTX A6000. A leave-one-study-out evaluation exposed the study batch effects that a within-study score hides.',
+    stats: ['0.85 AUROC within-study', '0.63 on held-out studies', '16,721 samples'],
     stack: ['Python', 'PyTorch', 'Hugging Face', 'scikit-learn', 'Pandas'],
     source: 'https://github.com/yashkumarvaibhav/DL-HumanGutMicrobiome',
     date: 'Jan 2026 — May 2026',
@@ -92,8 +92,8 @@ const projects = [
     title: 'VajraKavach',
     subtitle: 'Security-hardened professional networking platform',
     description:
-      'A team course project for Foundations of Computer Security at IIIT-Delhi: a professional-networking platform engineered around a threat model, then attacked by the rest of the class. Messages are end-to-end encrypted in the browser, so the server stores only ciphertext, behind Argon2id, revocable JWT sessions, mandatory TOTP 2FA and a hardened nginx edge.',
-    stats: ['End-to-end encryption', 'Mandatory TOTP 2FA', '3 VAPT rounds remediated'],
+      'A team course project for Foundations of Computer Security at IIIT-Delhi, then attacked by the rest of the class. Messages are end-to-end encrypted in the browser, so the server stores only ciphertext, behind Argon2id, revocable JWT sessions, mandatory TOTP 2FA, a hash-chained audit log and a hardened nginx edge.',
+    stats: ['End-to-end encryption', 'TOTP 2FA', '3 VAPT rounds remediated'],
     stack: ['FastAPI', 'PostgreSQL', 'React', 'Nginx', 'Web Crypto API'],
     live: 'https://vajrakavach.yashkumarvaibhav.me',
     source: 'https://github.com/yashkumarvaibhav/VajraKavach',
@@ -104,7 +104,7 @@ const projects = [
     title: 'CoExist Alert',
     subtitle: 'Edge early-warning platform for human–wildlife conflict',
     description:
-      'Team GitBoosters’ submission to the Code with Cisco 2026 Silver Flag CSR Challenge. The sensor field is simulated; Cisco Webex dispatch to the nearest guard is live. Confirmation, node health and the alert cascade are pure state machines, unacknowledged alerts escalate responder tiers, and a dead sensor raises its own blind-spot alert. Delivered through a spec-driven AI-agent workflow.',
+      'Team GitBoosters’ entry to the Code with Cisco 2026 Silver Flag CSR Challenge. The sensor field is simulated; Cisco Webex dispatch to the nearest guard is live. Unacknowledged alerts escalate responder tiers, and a dead sensor raises its own blind-spot alert. Delivered through a spec-driven AI-agent workflow.',
     stats: ['280 unit tests', '18 Playwright specs', 'Live Webex dispatch'],
     stack: ['Next.js', 'TypeScript', 'SQLite', 'Drizzle', 'Cisco Webex', 'Playwright'],
     live: 'https://coexist.yashkumarvaibhav.me',
@@ -115,7 +115,7 @@ const projects = [
     title: 'TradeVault',
     subtitle: 'Trading journal & risk workbench',
     description:
-      'A multi-tenant trading journal with a Monte-Carlo risk engine that resamples the trader’s own realised R-multiples. A seeded PRNG makes each simulation byte-identical for a given seed and input, position sizes are computed with the Kelly criterion two ways, and every result carries the label “historical scenario, not a forecast”. Delivered through a spec-driven AI-agent workflow.',
+      'A multi-tenant trading journal whose Monte-Carlo engine resamples the trader’s own realised R-multiples with a seeded PRNG, so a seed and input give byte-identical output. Kelly sizing is computed two ways, and every result is labelled “historical scenario, not a forecast”. Delivered through a spec-driven AI-agent workflow.',
     stats: ['158 unit tests', '19 Playwright specs', '12 migrations'],
     stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Drizzle', 'Web Workers', 'Vitest'],
     live: 'https://tradevault.yashkumarvaibhav.me',
@@ -575,22 +575,23 @@ function App() {
           <div className="project-list">
             {projects.map((project) => (
               <motion.article className="project-card" key={project.title} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
-                <div className="project-number">{project.index}</div>
-                <div className="project-main">
-                  <div className="project-meta"><span>{project.date}</span><span>Featured project</span></div>
-                  <h3>{project.title}</h3>
-                  <p className="project-subtitle">{project.subtitle}</p>
-                  <p className="project-description">{project.description}</p>
+                <div className="project-top">
+                  <div className="project-meta"><span className="project-number">{project.index}</span><span>{project.date}</span></div>
+                  <div className="project-links">
+                    {project.live && <a href={project.live} target="_blank" rel="noreferrer">Live demo <Arrow /></a>}
+                    {project.source && <a href={project.source} target="_blank" rel="noreferrer">Source <Arrow /></a>}
+                  </div>
+                </div>
+                <h3>{project.title}</h3>
+                <p className="project-subtitle">{project.subtitle}</p>
+                <p className="project-description">{project.description}</p>
+                <div className="project-footer">
                   <div className="project-stats">
                     {project.stats.map((stat) => <span key={stat}>{stat}</span>)}
                   </div>
                   <div className="tag-row">
                     {project.stack.map((item) => <span key={item}>{item}</span>)}
                   </div>
-                </div>
-                <div className="project-links">
-                  {project.live && <a href={project.live} target="_blank" rel="noreferrer">Live demo <Arrow /></a>}
-                  {project.source && <a href={project.source} target="_blank" rel="noreferrer">Source <Arrow /></a>}
                 </div>
               </motion.article>
             ))}
