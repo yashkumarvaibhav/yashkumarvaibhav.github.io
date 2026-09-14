@@ -87,17 +87,6 @@ const projects = [
     source: 'https://github.com/yashkumarvaibhav/DL-HumanGutMicrobiome',
     date: 'Jan 2026 — May 2026',
   },
-  {
-    index: '06',
-    title: 'IIIT Delhi Placement Tracker',
-    subtitle: 'Multi-batch placement analytics for IIIT Delhi students',
-    description:
-      'A full-stack platform that tracks companies, students, and multiple offers across placement batches, with program-level filters, CTC and stipend statistics, placement percentages, spreadsheet-backed imports, and authenticated administration.',
-    stats: ['Multi-batch data', 'Program-level analytics', 'Live deployment'],
-    stack: ['React', 'Express', 'PostgreSQL', 'Supabase', 'Google OAuth'],
-    live: 'https://yashkumarvaibhav.me/Placement_Tracker/',
-    date: '2025 — Present',
-  },
 ];
 
 const experience = [
