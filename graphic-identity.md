@@ -84,7 +84,9 @@ Do not use it as the primary accent on white pages.
 |---|---|---|---|
 | `h1` (display) | `clamp(2.8rem, 4vw, 4.6rem)` | `0.96` | `-0.04em` (tight) |
 | Portfolio hero `h1` | `clamp(3.7rem, 6.8vw, 7rem)` | `0.88` | `-0.055em` |
-| Portfolio section `h2` | `clamp(2.8rem, 5.4vw, 5.25rem)` | `0.98` | `-0.045em` |
+| Portfolio section `h2` | `clamp(2.2rem, 3.8vw, 3.6rem)` | `0.98` | `-0.045em` |
+| Portfolio contact `h2` | `clamp(2.8rem, 5.4vw, 5.25rem)` | `0.98` | `-0.045em` |
+| Portfolio project title `h3` | `clamp(1.85rem, 2.8vw, 2.75rem)` | `1` | `-0.035em` |
 | `h2` | `1.7rem` | — | slight negative |
 | `h3` | `1.1rem` | — | — |
 | Body | `1rem` | `1.65` | normal |
@@ -129,6 +131,14 @@ text contrast.
 ---
 
 ## 5. Portfolio Composition
+
+### Header
+
+- Sticky at every width, on the hero's `--cosmic-bg`. Once the page scrolls it tucks into a 64px bar
+  (56px on phones) with a translucent, blurred background; its box height never changes, so content
+  does not jump.
+- Desktop shows Work, Experience, About and Recognition, and underlines the section in view in
+  `--cosmic-teal`. At 850px and below the links move into a menu panel beside "Let's talk".
 
 ### Hero
 

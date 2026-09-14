@@ -24,31 +24,71 @@ const heroLinks = [
   ['whatsapp', 'WhatsApp', phone.whatsapp],
 ];
 
+const navItems = [
+  ['work', 'Work'],
+  ['experience', 'Experience'],
+  ['about', 'About'],
+  ['recognition', 'Recognition'],
+];
+
 const projects = [
   {
     index: '01',
-    title: 'GWiz',
-    subtitle: 'Agentic AI assistant for Google Workspace',
+    title: 'Sentinel',
+    subtitle: 'Observability, anomaly detection & reversible remediation platform',
     description:
-      'A full-stack assistant spanning Gmail, Calendar, Drive, Docs, Tasks, People, and Classroom, with reviewable human-in-the-loop actions and a multi-provider LLM layer.',
-    stats: ['70+ API routes', '668 test cases', '50+ OAuth scopes'],
-    stack: ['FastAPI', 'React', 'TypeScript', 'LangGraph', 'Gemini', 'OpenAI', 'Docker'],
-    live: 'https://gwiz.yashkumarvaibhav.me',
-    date: 'May 2026 — Present',
+      'A Python observability platform that separates the part of a traffic surge an event explains from the part it cannot, and acts only on what a deterministic verifier confirms. Measured on a lab testbed with real telemetry, injected faults and held-out replays; specified in a numbered decision log and delivered through a spec-driven AI-agent workflow.',
+    stats: ['16.8 s autonomous MTTR', '0 false actions', '1,000+ tests'],
+    stack: ['Python', 'FastAPI', 'Kafka', 'ClickHouse', 'PostgreSQL', 'Kubernetes', 'OpenTelemetry'],
+    live: 'https://sentinel.yashkumarvaibhav.me',
+    date: 'Jul 2026 — Present',
   },
   {
     index: '02',
+    title: 'GWiz',
+    subtitle: 'Human-in-the-loop LLM assistant for Google Workspace',
+    description:
+      'A team-built LLM assistant that works inside a user’s own Google Workspace, where nothing that changes mail or calendar runs without explicit approval. I owned the FastAPI backend: LangGraph approval flows that pause until the user decides, and OAuth 2.0 across ten Workspace APIs.',
+    stats: ['100+ API routes', '750+ tests', '50 OAuth scopes'],
+    stack: ['FastAPI', 'React', 'TypeScript', 'LangGraph', 'Gemini', 'OpenAI', 'Docker'],
+    live: 'https://gwiz.yashkumarvaibhav.me',
+    date: 'Mar 2026 — Jun 2026',
+  },
+  {
+    index: '03',
+    title: 'Job Pilot',
+    subtitle: 'Multi-tenant job-search CRM & outreach engine',
+    description:
+      'A multi-tenant CRM that runs a job search end to end — companies, contacts, applications, referrals, email sequences and analytics — driven by deterministic automation and publicly deployed with open signup. Every automated Gmail send waits on per-message approval and a thread-proof stamp. I specified it as 50+ engineering tasks across seven phases and delivered it through a spec-driven AI-agent workflow.',
+    stats: ['880+ tests', '31 migrations', '60+ design decisions'],
+    stack: ['Next.js', 'TypeScript', 'Node.js', 'SQLite', 'Drizzle', 'Gmail API', 'Vitest'],
+    live: 'https://jobpilot.yashkumarvaibhav.me',
+    date: 'Aug 2026 — Present',
+  },
+  {
+    index: '04',
+    title: 'Setu',
+    subtitle: 'Federated data integration over heterogeneous sources',
+    description:
+      'Answers “is this vehicle insured right now?” by querying five autonomous registries at query time, on entirely synthetic data. A source that did not answer is a different type from one that answered nothing, so an outage never becomes a wrong verdict. A course project at IIIT-Delhi: I led a four-person team and delivered it through a spec-driven AI-agent workflow.',
+    stats: ['1,100+ tests', '5 sources, 4 storage engines', '53 ms vs 138 ms serial'],
+    stack: ['Python', 'FastAPI', 'PostgreSQL', 'MariaDB', 'SQLite', 'asyncio'],
+    live: 'https://setu.yashkumarvaibhav.me',
+    date: 'Sep 2026',
+  },
+  {
+    index: '05',
     title: 'Gut Microbiome Disease Prediction',
     subtitle: 'ELECTRA transformer trained on microbial abundance sequences',
     description:
-      'A three-stage PyTorch pipeline for disease-vs-control classification over a 16,721-sample corpus, including generator pretraining, discriminator pretraining, and supervised fine-tuning.',
-    stats: ['0.85 AUROC', '129 studies', '16,721 samples'],
+      'Self-supervised ELECTRA transformers trained from scratch in PyTorch on a 16,721-sample, 129-study corpus, treating each species as a token. A leave-one-study-out evaluation exposed the study batch effects that a within-study score hides.',
+    stats: ['16,721 samples', '0.85 AUROC within-study', '0.63 AUROC on held-out studies'],
     stack: ['Python', 'PyTorch', 'Hugging Face', 'scikit-learn', 'Pandas'],
     source: 'https://github.com/yashkumarvaibhav/DL-HumanGutMicrobiome',
     date: 'Jan 2026 — May 2026',
   },
   {
-    index: '03',
+    index: '06',
     title: 'IIIT Delhi Placement Tracker',
     subtitle: 'Multi-batch placement analytics for IIIT Delhi students',
     description:
@@ -70,10 +110,10 @@ const experience = [
   },
   {
     company: 'SivaTech Solutions',
-    role: 'Software Engineer · Intern → Contract',
+    role: 'Software Engineer · Internship → Full-time Contract',
     date: 'Jan 2023 — Mar 2025',
     detail:
-      'Joined as an intern and continued on contract, owning development of a proprietary C++ algorithmic-trading backend. Built performance-critical data structures, signal and order-execution logic, resolved legacy defects, and optimized low-latency paths for reliability and throughput.',
+      'Joined as an intern, then continued on a full-time contract, building the C++ backend of a proprietary algorithmic trading platform: high-performance data structures and low-level optimizations for latency-critical order execution against live market-data feeds, across stocks, crypto and derivatives. Resolved race conditions in multithreaded components, optimized hot execution paths, debugged legacy systems, and developed signal-generation and order-execution logic.',
   },
 ];
 
@@ -82,43 +122,36 @@ const education = [
     school: 'IIIT Delhi',
     degree: 'M.Tech, Computer Science & Engineering',
     date: '2025 — Present',
-    score: 'CGPA 9.41',
+    score: 'CGPA 9.52',
   },
   {
     school: 'Thapar Institute of Engineering & Technology',
     degree: 'B.E., Computer Science & Engineering',
     date: '2019 — 2023',
-    score: 'CGPA 7.08',
-  },
-  {
-    school: 'Red Rose School, Deoghar',
-    degree: 'Class XII · PCM · CBSE',
-    date: '2018',
-    score: '72.4%',
-  },
-  {
-    school: 'Jawahar Navodaya Vidyalaya, Deoghar',
-    degree: 'Class X · CBSE',
-    date: '2016',
-    score: 'CGPA 10',
   },
 ];
 
 const skills = [
-  ['Languages', 'C, C++, Java, Python, SQL'],
-  ['Engineering', 'Backend development, algorithms, REST APIs, system design'],
-  ['Tools', 'Git/GitHub, Linux, Docker, Google Cloud Platform'],
-  ['AI workflow', 'Claude Code, Codex, GitHub Copilot'],
+  ['Languages', 'Python, C++, TypeScript, C, Java, SQL'],
+  ['Engineering', 'Backend and distributed systems, REST APIs, system design, algorithms'],
+  ['Stack & tools', 'FastAPI, Kafka, PostgreSQL, Docker, Kubernetes, PyTorch, LangGraph, Git/GitHub, Linux, Google Cloud Platform'],
+  ['AI-assisted engineering', 'Claude Code, Codex, GitHub Copilot — spec-driven agent workflows with test gates'],
 ];
 
 const recognition = [
   {
     label: 'Competitive programming',
-    items: ['Codeforces Expert · 1728 rating', 'CodeChef · 4 star', '500+ problems across LeetCode and Code360', 'TON MaraTON Challenge · Rank 60'],
+    items: ['Codeforces Expert · 1728 rating, top 5.2% of rated users', 'CodeChef · 4 star', '500+ problems across LeetCode and Code360', 'TON MaraTON Challenge · Rank 60'],
   },
   {
-    label: 'Academic & national ranks',
-    items: ['IIIT Delhi Dean’s List · upcoming recipient', 'JEE Advanced 2019 · AIR 7789', 'Engineers’ Ring of Honour · AIR 36'],
+    label: 'Competitions & national ranks',
+    items: [
+      'Code with Cisco 2026 · Finalist, top 75 of ~30,000 · Gold Flag Challenge winner',
+      'Amazon ML Summer School 2026 · Selected, top 3,000 of 134,421 registered',
+      'Engineers’ Ring of Honour (Naukri) · Finalist, AIR 36',
+      'JEE Advanced 2019 · AIR 7789, top 0.7% of JEE Main registrants',
+      'JEE Main 2019 · AIR ~31k, top 2.8%',
+    ],
   },
 ];
 
@@ -299,8 +332,8 @@ function CosmicAchievements() {
       <div className="achievement-planet achievement-planet--rating">
         <div><strong>1728</strong><span>Codeforces</span><small>Expert rating</small></div>
       </div>
-      <div className="achievement-planet achievement-planet--dean">
-        <div><strong>Dean’s List</strong><span>IIIT Delhi</span><small>upcoming recipient</small></div>
+      <div className="achievement-planet achievement-planet--amazon">
+        <div><strong>Top 2.3%</strong><span>Amazon MLSS</span><small>2026 selection</small></div>
       </div>
       <div className="achievement-planet achievement-planet--eroh">
         <div><strong>AIR 36</strong><span>Naukri EROH</span><small>national rank</small></div>
@@ -312,7 +345,7 @@ function CosmicAchievements() {
         <div><strong>AIR 7.8K</strong><span>JEE Advanced</span><small>2019</small></div>
       </div>
       <div className="achievement-planet achievement-planet--jee-main">
-        <div><strong>Qualified</strong><span>JEE Main</span><small>2019</small></div>
+        <div><strong>AIR&nbsp;~31K</strong><span>JEE Main</span><small>2019</small></div>
       </div>
     </div>
   );
@@ -394,6 +427,9 @@ function SectionHeading({ label, title, intro }) {
 
 function App() {
   const [introComplete, setIntroComplete] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -409,6 +445,33 @@ function App() {
       document.body.classList.remove('intro-lock');
     };
   }, [introComplete]);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    const visible = new Map();
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => visible.set(entry.target.id, entry.isIntersecting));
+      setActiveSection(navItems.map(([id]) => id).find((id) => visible.get(id)) ?? '');
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    navItems.forEach(([id]) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return undefined;
+    const onKeyDown = (event) => { if (event.key === 'Escape') setMenuOpen(false); };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [menuOpen]);
 
   return (
     <>
@@ -427,18 +490,23 @@ function App() {
       }}
       aria-busy={!introComplete}
     >
-      <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Yash Kumar Vaibhav, home">
+      <header className={`site-header${scrolled ? ' site-header--scrolled' : ''}${menuOpen ? ' site-header--open' : ''}`}>
+        <a className="wordmark" href="#top" aria-label="Yash Kumar Vaibhav, home" onClick={() => setMenuOpen(false)}>
           yashkumarvaibhav
         </a>
-        <nav aria-label="Primary navigation">
-          <a href="#work">Work</a>
-          <a href="#experience">Experience</a>
-          <a href="#about">About</a>
+        <nav id="primary-navigation" aria-label="Primary navigation">
+          {navItems.map(([id, label]) => (
+            <a href={`#${id}`} key={id} aria-current={activeSection === id ? 'location' : undefined} onClick={() => setMenuOpen(false)}>{label}</a>
+          ))}
         </nav>
-        <a className="header-contact" href="mailto:yashkumarvaibhav.official@gmail.com">
-          Let’s talk <Arrow />
-        </a>
+        <div className="header-actions">
+          <a className="header-contact" href="mailto:yashkumarvaibhav.official@gmail.com">
+            Let’s talk <Arrow />
+          </a>
+          <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="primary-navigation" aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} onClick={() => setMenuOpen((open) => !open)}>
+            <span aria-hidden="true" />
+          </button>
+        </div>
       </header>
 
       <main>
@@ -450,7 +518,7 @@ function App() {
             <p className="eyebrow"><span className="status-dot" /> New Delhi, India · Open to opportunities</p>
             <h1 id="hero-title">I build reliable software for difficult problems.</h1>
             <p className="hero-intro">
-              I’m Yash, a software engineer and M.Tech CSE student at IIIT Delhi. My work spans C++ backend systems, full-stack applications, applied deep learning, and algorithms.
+              I’m Yash, a software engineer and M.Tech CSE student at IIIT Delhi. I build backend and distributed systems, and I apply machine learning where its output can be checked.
             </p>
             <div className="hero-actions">
               <a className="button button--primary" href="#work">Explore my work <span aria-hidden="true">↓</span></a>
@@ -480,7 +548,7 @@ function App() {
         </section>
 
         <section className="section" id="work">
-          <SectionHeading label="01 / Selected work" title="Projects built end to end." intro="Backend software, applied deep learning, and a full-stack campus placement platform." />
+          <SectionHeading label="01 / Selected work" title="Projects built end to end." intro="Backend and distributed systems, applied machine learning, and LLM systems with verification designed in." />
           <div className="project-list">
             {projects.map((project) => (
               <motion.article className="project-card" key={project.title} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
@@ -525,7 +593,7 @@ function App() {
             {education.map((item) => (
               <article className="education-item" key={item.school}>
                 <div><h3>{item.school}</h3><p>{item.degree}</p></div>
-                <div><strong>{item.score}</strong><span>{item.date}</span></div>
+                <div>{item.score && <strong>{item.score}</strong>}<span>{item.date}</span></div>
               </article>
             ))}
           </div>
@@ -538,7 +606,7 @@ function App() {
         </section>
 
         <section className="section recognition-section" id="recognition">
-          <SectionHeading label="03 / Recognition" title="Signals beyond the project list." intro="Competitive programming and academic performance that reinforce the engineering work." />
+          <SectionHeading label="03 / Recognition" title="Signals beyond the project list." intro="Competitive programming, competitions and national ranks that reinforce the engineering work." />
           <div className="recognition-grid">
             {recognition.map((group) => (
               <motion.article key={group.label} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true, amount: .3 }}>
