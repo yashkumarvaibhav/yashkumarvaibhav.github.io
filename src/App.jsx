@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import portrait from '../myPhoto.png';
 
-const resumeUrl = 'https://drive.google.com/file/d/1tcMk7e5Wb2hNuMk0wINL136-hengflT1/view?usp=sharing';
+const resumeUrl = 'https://drive.google.com/file/d/1P6PexVC6MIq4473TwK33crijLTWUnJ8G/view?usp=sharing';
 
 const phone = { display: '+91 62076 94270', tel: 'tel:+916207694270', whatsapp: 'https://wa.me/916207694270' };
 
@@ -338,8 +338,8 @@ function CosmicAchievements() {
       <div className="achievement-planet achievement-planet--eroh">
         <div><strong>AIR 36</strong><span>Naukri EROH</span><small>national rank</small></div>
       </div>
-      <div className="achievement-planet achievement-planet--codechef">
-        <div><strong>4★</strong><span>CodeChef</span><small>competitive programming</small></div>
+      <div className="achievement-planet achievement-planet--cisco">
+        <div><strong>Top 75</strong><span>Code with Cisco</span><small>2026 finalist</small></div>
       </div>
       <div className="achievement-planet achievement-planet--jee-advanced">
         <div><strong>AIR 7.8K</strong><span>JEE Advanced</span><small>2019</small></div>
