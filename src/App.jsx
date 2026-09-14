@@ -164,7 +164,7 @@ const skills = [
 const recognition = [
   {
     label: 'Competitive programming',
-    items: ['Codeforces Expert · 1728 rating, top 5.2% of rated users', 'CodeChef · 4 star', '500+ problems across LeetCode and Code360', 'TON MaraTON Challenge · Rank 60'],
+    items: ['Codeforces Expert · 1728 rating, top 5.2% of rated users', '500+ problems across LeetCode and Code360'],
   },
   {
     label: 'Competitions & national ranks',
